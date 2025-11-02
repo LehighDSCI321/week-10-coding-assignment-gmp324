@@ -29,8 +29,17 @@ class TraversableDigraph(SortableDigraph):
             yield u
 
 class DAG(TraversableDigraph):
-    """"""
+    """DAG...to prevent graph cycles"""
 
+    def add_edge(self, u,v):
+        """adds edge from u to v, if a cycle is not created"""
+        if self._path_exists(v,u):
+            raise ValueError(f"Adding edge {u} -> {v} creates a cycle.")
+        super().add_edge(u, v)
 
-    pass
-
+    def _path_exists(self, start, target):
+        """helper method to return true if target is reachable from start"""
+        for node in self.dfs(start):
+            if node == target:
+                return True
+        return False
