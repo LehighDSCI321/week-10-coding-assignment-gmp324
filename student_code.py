@@ -9,6 +9,10 @@ class TraversableDigraph(SortableDigraph):
         """Return a list of nodes in the graph."""
         return list(self.graph.keys())
 
+    def get_node_value(self, node):
+        """Return the value associated with a node."""
+        return self.node_values.get(node, None)
+
     def dfs(self, start):
         """Depth-First Search...based on Listing 5-5 from Python Algs."""
         visited, stack = set(), [start] #replace listing variables for more clarity
