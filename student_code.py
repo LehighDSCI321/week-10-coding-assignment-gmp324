@@ -14,11 +14,12 @@ class TraversableDigraph(SortableDigraph):
         return list(self.graph.keys())
 
     def get_node_value(self, node):
-        """Return the value associated with a node."""
+        """Return the value stored for a node, or none if not set"""
         return self.node_values.get(node, None)
 
+
     def dfs(self, start):
-        """Depth-First Search...based on Listing 5-5 from Python Algs."""
+        """Depth-First Search...based on Listing 5-5 from Python Algs"""
         visited, stack = set(), [start]
         while stack:
             u = stack.pop()
