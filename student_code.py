@@ -1,6 +1,6 @@
 """Creating TraversableDigraph and DAG classes with some inheritance dependencies"""
 from SortableDigraph import SortableDigraph #for inheritance
-from collections import deque #for queue structures
+from collections import deque #for queue structure in bfs
 
 class TraversableDigraph(SortableDigraph):
     """augments SortableDigraph with BFS and DFS methods"""
@@ -18,7 +18,18 @@ class TraversableDigraph(SortableDigraph):
 
     def bfs(self, start):
         """Breadth-First Search...based on Listing 5-6 from Python Algs."""
-        
+        visited, queue=set(), deque([start])
+        while queue:
+            u = u.queue.popleft()
+            if u in visited:
+                continue
+            visited.add(u)
+            for v in self.graph.get(u, []):
+                queue.append(v)
+            yield u
+
+class DAG(TraversableDigraph):
+    """"""
 
 
     pass
