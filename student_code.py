@@ -14,15 +14,16 @@ class TraversableDigraph(SortableDigraph):
         return self.node_values.get(node, None)
 
     def dfs(self, start):
-        """Depth-First Search...based on Listing 5-5 from Python Algorithms."""
-        visited, stack = set(), [start]
+        """Depth-First Search excluding the start node."""
+        visited, stack = set([start]), [start]
         while stack:
             u = stack.pop()
-            if u in visited:
-                continue
-            visited.add(u)
-            stack.extend(reversed([v for v, _ in self.graph.get(u, {}).values()]))
-            yield u
+            for v, _ in self.graph.get(u, {}).values():
+                if v not in visited:
+                    visited.add(v)
+                    stack.append(v)
+                    yield v
+
 
     def bfs(self, start):
         """Breadth-First Search...based on Listing 5-6 from Python Algorithms."""
@@ -55,4 +56,3 @@ class DAG(TraversableDigraph):
             if node == target:
                 return True
         return False
-    
