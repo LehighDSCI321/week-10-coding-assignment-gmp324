@@ -41,14 +41,12 @@ class TraversableDigraph(SortableDigraph):
 class DAG(TraversableDigraph):
     """DAG that prevents cycles when adding edges."""
 
-    def add_edge(self, from_node, to_node, edge_name=None, weight=1, edge_weight=None, **kwargs):
-        """Add an edge from from_node to to_node if a cycle is not created."""
-        _ = kwargs  # intentionally unused
-        if edge_weight is not None:
-            weight = edge_weight
-        if self._path_exists(to_node, from_node):
-            raise ValueError(f"Adding edge {from_node} -> {to_node} creates a cycle.")
-        super().add_edge(from_node, to_node, edge_name=edge_name, weight=weight)
+    def add_edge(self, u, v, edge_name=None, edge_weight=1, **kwargs):
+        """Add edge from u to v if no cycle is created."""
+        if self._path_exists(v, u):
+            raise ValueError(f"Adding edge {u} -> {v} creates a cycle.")
+        super().add_edge(u, v, edge_name=edge_name, weight=edge_weight)
+
 
     def _path_exists(self, start, target):
         """Return True if target is reachable from start."""
