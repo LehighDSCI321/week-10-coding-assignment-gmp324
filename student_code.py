@@ -4,11 +4,6 @@ from SortableDigraph import SortableDigraph
 
 class TraversableDigraph(SortableDigraph):
     """Augments SortableDigraph with BFS and DFS methods."""
-
-    def add_node(self, node, value=None):
-        """Add a node with an optional value."""
-        super().add_node(node, value)
-
     def get_nodes(self):
         """Return a list of nodes in the graph."""
         return list(self.graph.keys())
