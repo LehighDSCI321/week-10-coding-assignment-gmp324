@@ -17,7 +17,6 @@ class TraversableDigraph(SortableDigraph):
         """Return the value stored for a node, or none if not set"""
         return self.node_values.get(node, None)
 
-
     def dfs(self, start):
         """Depth-First Search...based on Listing 5-5 from Python Algs"""
         visited, stack = set(), [start]
@@ -32,14 +31,14 @@ class TraversableDigraph(SortableDigraph):
     def bfs(self, start):
         """Breadth-First Search...based on Listing 5-6 from Python Algs."""
         visited, queue = set(), deque([start])
+        visited.add(start)
         while queue:
             u = queue.popleft()
-            if u in visited:
-                continue
-            visited.add(u)
             for v, _ in self.graph.get(u, {}).values():
-                queue.append(v)
-            yield u
+                if v not in visited:
+                    visited.add(v)
+                    queue.append(v)
+                    yield v  # only yield neighbors, not the start node
 
 class DAG(TraversableDigraph):
     """DAG...to prevent graph cycles"""
