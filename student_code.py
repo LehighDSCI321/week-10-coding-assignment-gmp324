@@ -55,3 +55,4 @@ class DAG(TraversableDigraph):
             if node == target:
                 return True
         return False
+    
