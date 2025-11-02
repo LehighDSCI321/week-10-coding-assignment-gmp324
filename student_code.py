@@ -32,7 +32,7 @@ class TraversableDigraph(SortableDigraph):
             if u in visited:
                 continue
             visited.add(u)
-            for v in self.graph.get(u, {}):
+            for v, _ in self.graph.get(u, {}).values():
                 queue.append(v)
             yield u
 
