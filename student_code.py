@@ -3,7 +3,11 @@ from collections import deque #for queue structure bfs
 from SortableDigraph import SortableDigraph
 
 class TraversableDigraph(SortableDigraph):
-    """augments SortableDigraph with BFS and DFS methods"""
+    """Augments SortableDigraph with BFS and DFS methods."""
+
+    def add_node(self, node, value=None):
+        """Add a node with an optional value."""
+        super().add_node(node, value)
 
     def get_nodes(self):
         """Return a list of nodes in the graph."""
@@ -15,7 +19,7 @@ class TraversableDigraph(SortableDigraph):
 
     def dfs(self, start):
         """Depth-First Search...based on Listing 5-5 from Python Algs."""
-        visited, stack = set(), [start] #replace listing variables for more clarity
+        visited, stack = set(), [start]
         while stack:
             u = stack.pop()
             if u in visited:
